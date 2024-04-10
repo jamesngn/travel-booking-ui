@@ -1,6 +1,7 @@
 import { MutateFunction } from "@tanstack/react-query";
 
 import { apiV1Instance } from "./axiosInstance/apiV1";
+import { IHotelDetail } from "@/pages/hotel.page/interfaces";
 
 type TMutationConfig = {
   name: string;
@@ -20,7 +21,7 @@ type TResponse<TData> = {
 export const getListHotelQuery = {
   name: "getListHotel",
   fn: async (data) => {
-    const res = await apiV1Instance<TResponse<any>>({
+    const res = await apiV1Instance<TResponse<IHotelDetail[]>>({
       url: "/hotels/search",
       method: "POST",
       data,
@@ -29,5 +30,19 @@ export const getListHotelQuery = {
     const hotels = res.data.data;
 
     return hotels;
+  },
+};
+
+export const getHotelDetailQuery = {
+  name: "getHotelDetail",
+  fn: async (id: number) => {
+    const res = await apiV1Instance<TResponse<any>>({
+      url: `/hotel/detail/${id}`,
+      method: "GET",
+    });
+
+    const hotel = res.data.data;
+
+    return hotel;
   },
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 
 const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (

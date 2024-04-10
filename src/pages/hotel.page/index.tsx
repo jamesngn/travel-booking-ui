@@ -1,29 +1,23 @@
 import { useGetListHotelQuery } from "../../api/hooks/hotel.hook";
 import React from "react";
+import HotelCardList from "./components/hotel-card-list";
 
-const HotelResultsPage = () => {
+const HotelPage: React.FC = () => {
   const { isLoading, data } = useGetListHotelQuery({
     location: "Melbourne",
   });
 
-  console.log(data);
   return (
     <div>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <ul>
-          {data.map((hotel) => (
-            <>
-              <li key={hotel.id}>{hotel.location}</li>
-              <li key={hotel.id}>{hotel.name}</li>
-              <li key={hotel.id}>{hotel.price}</li>q
-            </>
-          ))}
-        </ul>
+        <>
+          <HotelCardList hotelList={data} />
+        </>
       )}
     </div>
   );
 };
 
-export default HotelResultsPage;
+export default HotelPage;
