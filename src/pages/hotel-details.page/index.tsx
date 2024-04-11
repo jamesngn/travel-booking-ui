@@ -1,15 +1,28 @@
 import { Box } from "@mantine/core";
 import { useGetHotelDetailQuery } from "../../api/hooks/hotel.hook";
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import RoomCardList from "./components/room-card-list";
+import { IHotelDetailQuery } from "@/api/hotel";
 
 const HotelDetailsPage = () => {
   // extract id from the link
   const { id } = useParams();
-  const { isLoading, data: hotelDetails } = useGetHotelDetailQuery(id);
 
-  console.log(hotelDetails);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+
+  const checkInDate = searchParams.get("checkInDate");
+  const checkOutDate = searchParams.get("checkOutDate");
+
+  const hotelDetailQuery: IHotelDetailQuery = {
+    hotelId: Number(id),
+    checkInDate,
+    checkOutDate,
+  };
+
+  const { isLoading, data: hotelDetails } =
+    useGetHotelDetailQuery(hotelDetailQuery);
 
   return (
     <Box>

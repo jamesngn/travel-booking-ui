@@ -2,7 +2,10 @@ import { MutateFunction } from "@tanstack/react-query";
 
 import { apiV1Instance } from "./axiosInstance/apiV1";
 import { IHoteData } from "@/pages/hotel.page/interfaces";
-import { IHotelDetailData } from "@/pages/hotel-details.page/interfaces";
+import {
+  IHotelDetailData,
+  IRoomSelection,
+} from "@/pages/hotel-details.page/interfaces";
 
 type TMutationConfig = {
   name: string;
@@ -34,16 +37,47 @@ export const getListHotelQuery = {
   },
 };
 
+export interface IHotelDetailQuery {
+  hotelId: number;
+  checkInDate: string;
+  checkOutDate: string;
+}
+
 export const getHotelDetailQuery = {
   name: "getHotelDetail",
-  fn: async (id: number) => {
+  fn: async (data: IHotelDetailQuery) => {
     const res = await apiV1Instance<TResponse<IHotelDetailData>>({
-      url: `/hotel/detail/${id}`,
-      method: "GET",
+      url: `/hotel/detail`,
+      method: "POST",
+      data,
     });
 
     const hotel = res.data.data;
 
     return hotel;
+  },
+};
+
+export interface IReserveRoomQuery {
+  bookingId: number;
+  hotelId: number;
+  userId: number;
+  checkInDate: string;
+  checkOutDate: string;
+  rooms: IRoomSelection[];
+}
+
+export const reserveRoomMutation = {
+  name: "reserveRoom",
+  fn: async (data?: any) => {
+    const res = await apiV1Instance<TResponse<any>>({
+      url: "/bookings/hotel/create",
+      method: "POST",
+      data,
+    });
+
+    const response = res.data.data;
+
+    return response;
   },
 };

@@ -1,6 +1,12 @@
 import { MutationOptions, useMutation, useQuery } from "@tanstack/react-query";
 
-import { getHotelDetailQuery, getListHotelQuery } from "../hotel";
+import {
+  getHotelDetailQuery,
+  getListHotelQuery,
+  IHotelDetailQuery,
+  IReserveRoomQuery,
+  reserveRoomMutation,
+} from "../hotel";
 
 export const useGetListHotelQuery = (data) => {
   return useQuery({
@@ -11,11 +17,19 @@ export const useGetListHotelQuery = (data) => {
   });
 };
 
-export const useGetHotelDetailQuery = (id) => {
+export const useGetHotelDetailQuery = (data: IHotelDetailQuery) => {
   return useQuery({
-    queryKey: [getListHotelQuery.name, id],
+    queryKey: [getListHotelQuery.name, data],
     queryFn: () => {
-      return getHotelDetailQuery.fn(id);
+      return getHotelDetailQuery.fn(data);
     },
+  });
+};
+
+export const useReserveRoomMutation = (options?: MutationOptions) => {
+  return useMutation({
+    mutationKey: [reserveRoomMutation.name],
+    mutationFn: reserveRoomMutation.fn,
+    ...options,
   });
 };

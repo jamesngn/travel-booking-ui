@@ -15,7 +15,7 @@ export const useRoomSelectionManagementStore = create<State & Action>(
     setRoomSelection: (value) =>
       set((state) => {
         const existingRoomIndex = state.roomSelection.findIndex(
-          (room) => room.roomType === value.roomType
+          (room) => room.type === value.type
         );
 
         if (existingRoomIndex !== -1) {

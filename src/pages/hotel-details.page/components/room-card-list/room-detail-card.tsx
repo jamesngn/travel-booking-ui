@@ -57,7 +57,7 @@ const RoomDetailCard: React.FC<IRoomDetailCardProps> = ({
           max={data.availableRooms}
           value={currentRoomSelection.quantity}
           onChange={(value) => {
-            setRoomSelection({ roomType: data.type, quantity: Number(value) });
+            setRoomSelection({ type: data.type, quantity: Number(value) });
           }}
           required
         />

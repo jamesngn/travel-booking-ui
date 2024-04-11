@@ -1,9 +1,15 @@
 import { Card, Image, Text, Badge, Button, Group } from "@mantine/core";
 import React from "react";
 import { IHoteData } from "../../interfaces";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const HotelCard: React.FC<{ hotel: IHoteData }> = ({ hotel }) => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+
+  const checkInDate = searchParams.get("checkInDate");
+  const checkOutDate = searchParams.get("checkOutDate");
+
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Card.Section>
@@ -19,7 +25,9 @@ const HotelCard: React.FC<{ hotel: IHoteData }> = ({ hotel }) => {
         <Badge color="orange">{hotel.location}</Badge>
       </Group>
 
-      <Link to={`/hotel/${hotel.id}`}>
+      <Link
+        to={`/hotel/${hotel.id}?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`}
+      >
         <Button color="blue" fullWidth mt="md" radius="md">
           Book Now
         </Button>
