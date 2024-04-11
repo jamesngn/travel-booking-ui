@@ -1,9 +1,9 @@
 import { Card, Image, Text, Badge, Button, Group } from "@mantine/core";
 import React from "react";
-import { IHotelDetail } from "../../interfaces";
+import { IHoteData } from "../../interfaces";
 import { Link } from "react-router-dom";
 
-const HotelCard: React.FC<{ hotel: IHotelDetail }> = ({ hotel }) => {
+const HotelCard: React.FC<{ hotel: IHoteData }> = ({ hotel }) => {
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Card.Section>
@@ -21,7 +21,7 @@ const HotelCard: React.FC<{ hotel: IHotelDetail }> = ({ hotel }) => {
 
       <Link to={`/hotel/${hotel.id}`}>
         <Button color="blue" fullWidth mt="md" radius="md">
-          Select Room
+          Book Now
         </Button>
       </Link>
     </Card>

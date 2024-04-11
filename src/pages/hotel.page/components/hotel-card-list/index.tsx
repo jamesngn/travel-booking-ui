@@ -1,12 +1,10 @@
 import React from "react";
 import { Box } from "@mantine/core";
 
-import { IHotelDetail } from "../../interfaces";
+import { IHoteData } from "../../interfaces";
 import HotelCard from "./hotel-card";
 
-const HotelCardList: React.FC<{ hotelList: IHotelDetail[] }> = ({
-  hotelList,
-}) => {
+const HotelCardList: React.FC<{ hotelList: IHoteData[] }> = ({ hotelList }) => {
   return (
     <Box
       className="hotel-list-ctn"

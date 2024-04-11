@@ -7,7 +7,7 @@ const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <header>Travel App</header>
 
       {/* Main content */}
-      <main>{children}</main>
+      <main style={{ margin: "0 120px" }}>{children}</main>
 
       {/* Footer */}
       <footer>

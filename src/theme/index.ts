@@ -3,21 +3,21 @@ import { createTheme, Drawer } from "@mantine/core";
 export const theme = createTheme({
   fontFamily: "Manrope, sans-serif",
   colors: {
-    green: [
-      "#dff7df",
-      "#96eb99",
-      "#6ade72",
-      "#43d151",
-      "#1fc435",
-      "#00b71f",
-      "#00911d",
-      "#006b19",
-      "#004512",
-      "#001f09",
+    blue: [
+      "#f0f5ff",
+      "#c2d5ff",
+      "#94baff",
+      "#6e9eff",
+      "#4a7eff",
+      "#2a5ee4",
+      "#003db3",
+      "#002884",
+      "#001554",
+      "#000b2b",
     ],
   },
   primaryShade: 5,
-  primaryColor: "green",
+  primaryColor: "blue",
   cursorType: "pointer",
   components: {
     Drawer: Drawer.extend({

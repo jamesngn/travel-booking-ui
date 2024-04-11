@@ -15,7 +15,6 @@ export const useGetHotelDetailQuery = (id) => {
   return useQuery({
     queryKey: [getListHotelQuery.name, id],
     queryFn: () => {
-      console.log(id);
       return getHotelDetailQuery.fn(id);
     },
   });
