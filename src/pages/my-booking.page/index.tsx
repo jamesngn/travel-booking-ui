@@ -3,6 +3,7 @@ import Loading from "@/components/Loading";
 import Auth from "@/shared/services/auth";
 import { Box } from "@mantine/core";
 import React from "react";
+import BookingDetailCardList from "./components/booking-detail-card-list";
 
 const MyBookingPage = () => {
   const userId = Auth.token || null;
@@ -12,7 +13,6 @@ const MyBookingPage = () => {
   }
 
   const { data, isLoading } = useGetHotelBookingByUserQuery(Number(userId));
-
   const renderBookings = () => {
     if (isLoading) {
       return <Loading isLoading={isLoading} />;
@@ -22,19 +22,11 @@ const MyBookingPage = () => {
       return <div>No bookings found</div>;
     }
 
-    return data.map((booking, index) => (
-      <div key={index}>
-        <h2>{booking.hotel}</h2>
-        <p>Check in: {booking.checkInDate}</p>
-        <p>Check out: {booking.checkOutDate}</p>
-        {booking.rooms.map((room, index) => (
-          <div key={index}>
-            <h3>{room.type}</h3>
-            <p>Price: {room.price}</p>
-          </div>
-        ))}
-      </div>
-    ));
+    return (
+      <>
+        <BookingDetailCardList bookingList={data} />
+      </>
+    );
   };
 
   return (
