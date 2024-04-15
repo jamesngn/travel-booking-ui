@@ -1,9 +1,10 @@
-import { Box } from "@mantine/core";
+import { Box, Paper } from "@mantine/core";
 import { useGetHotelDetailQuery } from "../../api/hooks/hotel.hook";
 import React from "react";
 import { useLocation, useParams } from "react-router-dom";
 import RoomCardList from "./components/room-card-list";
 import { IHotelDetailQuery } from "@/api/hotel";
+import { formatDate } from "@/shared/utils/date";
 
 const HotelDetailsPage = () => {
   // extract id from the link
@@ -29,10 +30,25 @@ const HotelDetailsPage = () => {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <>
-          <div>{hotelDetails.hotel.name}</div>
-          <RoomCardList data={hotelDetails.rooms} />
-        </>
+        <Paper
+          style={{
+            padding: "20px",
+            margin: "20px",
+            borderRadius: "20px",
+            border: "1px solid #ddd",
+            backgroundColor: "#f9f9f9",
+          }}
+        >
+          <h1>{hotelDetails.hotel.name}</h1>
+          {hotelDetails.rooms.length === 0 ? (
+            <div>
+              Sadly, there are no rooms available from {formatDate(checkInDate)}{" "}
+              to {formatDate(checkOutDate)}
+            </div>
+          ) : (
+            <RoomCardList data={hotelDetails.rooms} />
+          )}
+        </Paper>
       )}
     </Box>
   );

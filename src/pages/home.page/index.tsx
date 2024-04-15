@@ -1,4 +1,4 @@
-import { formatDate } from "@/shared/utils/date";
+import { formatDate, getCurrentDate } from "@/shared/utils/date";
 import { Box, Button, TextInput } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import { useForm } from "@mantine/form";
@@ -10,20 +10,19 @@ const HomePage = () => {
   const form = useForm({
     initialValues: {
       location: "",
-      checkInDate: "",
-      checkOutDate: "",
+      checkInDate: new Date(),
+      checkOutDate: new Date(new Date().getTime() + 86400000 * 7),
     },
 
     validate: {
-      //   location: (value) => value.length > 0,
-      //   checkInDate: (value) => value.length > 0,
-      //   checkOutDate: (value) => value.length > 0,
+      location: (value) => (value.length < 3 ? "Location is too short" : null),
     },
   });
 
   const navigate = useNavigate();
 
   const handleSubmit = (values) => {
+    console.log(values);
     const formattedCheckInDate = formatDate(
       values.checkInDate,
       "YYYY-MM-DDT00:00:00"
@@ -63,17 +62,19 @@ const HomePage = () => {
 
           <DatePickerInput
             label="Check-in Date"
-            valueFormat="YYYY-MM-DDT08:00:00"
+            valueFormat="YYYY-MM-DD"
             required
             radius="md"
+            placeholder="Select check-in date"
             {...form.getInputProps("checkInDate")}
           />
 
           <DatePickerInput
             label="Check-out Date"
-            valueFormat="YYYY-MM-DDT12:00:00"
+            valueFormat="YYYY-MM-DD"
             required
             radius="md"
+            placeholder="Select check-out date"
             {...form.getInputProps("checkOutDate")}
           />
 
