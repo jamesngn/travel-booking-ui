@@ -1,20 +1,63 @@
 import React, { Suspense } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import AppLayout from "./shared/components/layout/app-layout";
 import HotelPage from "./pages/hotel.page";
 import HotelDetailsPage from "./pages/hotel-details.page";
 import HomePage from "./pages/home.page";
+import ProtectedRoute from "./protected-route";
+import LoginPage from "./shared/services/auth/login";
+import MyBookingPage from "./pages/my-booking.page";
+import Succes from "./pages/status.page/success";
+import Loading from "./components/Loading";
 
 const AppRoutes = () => {
   return (
     <AppLayout>
-      <Suspense fallback={<div>Loading...</div>}></Suspense>
+      <Suspense fallback={<Loading />}></Suspense>
       <Routes>
-        <Route index path="/" element={<HomePage />} />
-        <Route path="/hotel" element={<HotelPage />} />
-        <Route path="/hotel/:id" element={<HotelDetailsPage />} />
-        <Route path="/success" element={<h1>Successful Booking!</h1>} />
-        <Route path="/contact" element={<div>Contact</div>} />
+        <Route index path="/login" element={<LoginPage />} />
+
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/hotel"
+          element={
+            <ProtectedRoute>
+              <HotelPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/hotel/:id"
+          element={
+            <ProtectedRoute>
+              <HotelDetailsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/success"
+          element={
+            <ProtectedRoute>
+              <Succes />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/my-booking"
+          element={
+            <ProtectedRoute>
+              <MyBookingPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </AppLayout>
   );
