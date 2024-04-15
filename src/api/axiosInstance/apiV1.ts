@@ -11,7 +11,7 @@ const apiV1Instance = axios.create({
 
 apiV1Instance.interceptors.request.use((config) => {
   // get access token from cookie (browser)
-  const accessTokenCookieVal = Cookies.get("access_token");
+  const accessTokenCookieVal = Cookies.get("id");
   config.headers["Authorization"] = "Bearer " + accessTokenCookieVal;
 
   return config;
