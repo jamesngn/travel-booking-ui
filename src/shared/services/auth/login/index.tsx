@@ -9,6 +9,8 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
@@ -19,12 +21,14 @@ const LoginPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     const res = await Auth.login({ email, password });
     if (res.successful) {
       navigate("/");
     } else {
       alert(res.exception ?? "An error occurred");
     }
+    setLoading(false);
   };
 
   return (
@@ -57,7 +61,9 @@ const LoginPage: React.FC = () => {
               onChange={handlePasswordChange}
             />
           </div>
-          <Button type="submit">Login</Button>
+          <Button type="submit" loading={loading}>
+            Login
+          </Button>
         </Box>
       </form>
     </Box>
