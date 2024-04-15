@@ -1,9 +1,9 @@
 import { Card, Image, Text, Badge, Button, Group } from "@mantine/core";
 import React from "react";
-import { IHoteData } from "../../interfaces";
+import { IHotelData } from "../../interfaces";
 import { Link, useLocation } from "react-router-dom";
 
-const HotelCard: React.FC<{ hotel: IHoteData }> = ({ hotel }) => {
+const HotelCard: React.FC<{ hotel: IHotelData }> = ({ hotel }) => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
 
