@@ -60,7 +60,7 @@ class AuthService {
 
   logout = async (path?: string) => {
     this.removeAuth();
-    let url = "/login";
+    let url = "/";
     if (path) url += `?callbackUrl=${path}`;
     window.location.assign(url);
   };
