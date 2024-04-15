@@ -27,7 +27,7 @@ const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           }}
         >
           {!isLoginPage ? <HomeButton /> : <div></div>}
-          <h1> Travel App </h1>
+          <h1> Trip Tailor </h1>
           {!isLoginPage ? (
             <div
               style={{
@@ -69,7 +69,7 @@ const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         }}
       >
         {/* Add your footer content here */}
-        Travel App &copy; 2024
+        Trip Tailor &copy; 2024
       </footer>
     </div>
   );

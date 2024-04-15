@@ -32,7 +32,16 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <Box w={500}>
+    <Box
+      w={500}
+      style={{
+        margin: "auto",
+        marginTop: "100px",
+        padding: "20px",
+        border: "1px solid #ddd",
+        borderRadius: "10px",
+      }}
+    >
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
         <Box
