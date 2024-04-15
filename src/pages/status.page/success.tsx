@@ -1,8 +1,6 @@
-import { Button } from "@mantine/core";
 import React from "react";
-import HomeButton from "./components/HomeButton";
 
-const Succes = () => {
+const Success = () => {
   return (
     <div>
       <h1>Successful Booking!</h1>
@@ -10,4 +8,4 @@ const Succes = () => {
   );
 };
 
-export default Succes;
+export default Success;
