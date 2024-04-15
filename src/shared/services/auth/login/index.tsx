@@ -1,6 +1,6 @@
 import Auth from "@/shared/services/auth";
 import { Box, Button, Input, InputLabel } from "@mantine/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage: React.FC = () => {
@@ -18,6 +18,12 @@ const LoginPage: React.FC = () => {
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
+
+  useEffect(() => {
+    if (Auth.token) {
+      navigate("/");
+    }
+  }, [Auth.token, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
