@@ -11,7 +11,7 @@ const HomePage = () => {
     initialValues: {
       location: "",
       checkInDate: new Date(),
-      checkOutDate: new Date(new Date().getTime() + 86400000 * 7),
+      checkOutDate: new Date(new Date().getTime() + 86400000),
     },
 
     validate: {
@@ -66,6 +66,7 @@ const HomePage = () => {
             required
             radius="md"
             placeholder="Select check-in date"
+            minDate={new Date()}
             {...form.getInputProps("checkInDate")}
           />
 
@@ -75,6 +76,7 @@ const HomePage = () => {
             required
             radius="md"
             placeholder="Select check-out date"
+            minDate={new Date(new Date().getTime() + 86400000)}
             {...form.getInputProps("checkOutDate")}
           />
 
