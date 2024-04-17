@@ -59,7 +59,6 @@ export const getHotelDetailQuery = {
 };
 
 export interface IReserveRoomQuery {
-  bookingId: number;
   hotelId: number;
   userId: number;
   checkInDate: string;
