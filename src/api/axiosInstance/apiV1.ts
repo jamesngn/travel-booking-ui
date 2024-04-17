@@ -19,7 +19,11 @@ apiV1Instance.interceptors.request.use((config) => {
 
 apiV1Instance.interceptors.response.use((config) => {
   if (config.data?.exception) {
-    notifications.show({ message: config.data?.exception });
+    notifications.show({
+      message: config.data?.exception,
+      color: "red",
+      title: "Error",
+    });
     throw new Error(config.data?.exception);
   }
 
