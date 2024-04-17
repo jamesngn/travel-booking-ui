@@ -4,6 +4,8 @@ import "@mantine/notifications/styles.css";
 
 import "./App.scss";
 
+import { Analytics } from "@vercel/analytics/react";
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
@@ -35,5 +37,6 @@ root.render(
       zIndex={10011}
       autoClose={5000}
     />
+    <Analytics />
   </ProvidersTree>
 );
