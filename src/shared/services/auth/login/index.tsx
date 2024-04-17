@@ -1,5 +1,6 @@
 import Auth from "@/shared/services/auth";
 import { Box, Button, Input, InputLabel } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -31,8 +32,21 @@ const LoginPage: React.FC = () => {
     const res = await Auth.login({ email, password });
     if (res.successful) {
       navigate("/");
+      notifications.show({
+        message: "Login successful",
+        color: "green",
+        title: "Success",
+        autoClose: 2000,
+      });
     } else {
-      alert(res.exception ?? "An error occurred");
+      notifications.show({
+        message:
+          res.exception ??
+          "An error has occurred. This could be due to CORS not being enabled. Please download CORS extension on your browser (I suggest Allow CORS: Access-Control-Allow-Origin), turn it on and try again.",
+        color: "red",
+        title: "Error",
+        autoClose: 20000,
+      });
     }
     setLoading(false);
   };
