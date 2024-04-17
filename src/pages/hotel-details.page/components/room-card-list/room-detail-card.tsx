@@ -29,7 +29,7 @@ const RoomDetailCard: React.FC<IRoomDetailCardProps> = ({
     >
       <div style={{ width: "1000px" }}>
         <img
-          style={{ width: "100%", height: "200px", objectFit: "cover" }}
+          style={{ width: "100%", height: "175px", objectFit: "cover" }}
           src={
             RoomTypeData[data.type].imgSrc || "https://via.placeholder.com/150"
           }
