@@ -9,7 +9,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 
 import { MantineProvider } from "@mantine/core";
-import { notifications } from "@mantine/notifications";
+import { Notifications } from "@mantine/notifications";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { buildProvidersTree } from "./shared/utils";
@@ -22,12 +22,18 @@ const root = ReactDOM.createRoot(
 const queryClient = new QueryClient({});
 
 const ProvidersTree = buildProvidersTree([
-  [MantineProvider, { theme, notifications }],
+  [MantineProvider, { theme }],
   [QueryClientProvider, { client: queryClient }],
 ]);
 
 root.render(
   <ProvidersTree>
     <App />
+    <Notifications
+      id="noti-id"
+      position="top-right"
+      zIndex={10011}
+      autoClose={5000}
+    />
   </ProvidersTree>
 );
