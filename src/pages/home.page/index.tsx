@@ -1,5 +1,5 @@
 import { formatDate, getCurrentDate } from "@/shared/utils/date";
-import { Box, Button, TextInput } from "@mantine/core";
+import { Box, Button, Select, TextInput } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import { useForm } from "@mantine/form";
 
@@ -10,19 +10,18 @@ const HomePage = () => {
   const form = useForm({
     initialValues: {
       location: "",
-      checkInDate: new Date(),
-      checkOutDate: new Date(new Date().getTime() + 86400000),
+      checkInDate: new Date(new Date().getTime() + 86400000),
+      checkOutDate: new Date(new Date().getTime() + 86400000 * 2),
     },
 
     validate: {
-      location: (value) => (value.length < 3 ? "Location is too short" : null),
+      location: (value) => (value.length == 0 ? "Location is required" : null),
     },
   });
 
   const navigate = useNavigate();
 
   const handleSubmit = (values) => {
-    console.log(values);
     const formattedCheckInDate = formatDate(
       values.checkInDate,
       "YYYY-MM-DDT00:00:00"
@@ -51,12 +50,22 @@ const HomePage = () => {
           borderRadius: "10px",
         }}
       >
-        <form onSubmit={form.onSubmit(handleSubmit)}>
-          <TextInput
+        <form onSubmit={form.onSubmit(handleSubmit)} noValidate>
+          <Select
             label="Location"
             placeholder="Enter your location"
             required
             radius="md"
+            error={form.errors.location}
+            data={[
+              { value: "Melbourne", label: "Melbourne" },
+              { value: "Sydney", label: "Sydney" },
+              { value: "Brisbane", label: "Brisbane" },
+              { value: "Perth", label: "Perth" },
+              { value: "Darwin", label: "Darwin" },
+              { value: "Hobart", label: "Hobart" },
+              { value: "Adelaide", label: "Adelaide" },
+            ]}
             {...form.getInputProps("location")}
           />
 
@@ -66,7 +75,7 @@ const HomePage = () => {
             required
             radius="md"
             placeholder="Select check-in date"
-            minDate={new Date()}
+            minDate={new Date(new Date().getTime() + 86400000)}
             {...form.getInputProps("checkInDate")}
           />
 
@@ -76,7 +85,7 @@ const HomePage = () => {
             required
             radius="md"
             placeholder="Select check-out date"
-            minDate={new Date(new Date().getTime() + 86400000)}
+            minDate={new Date(new Date().getTime() + 86400000 * 2)}
             {...form.getInputProps("checkOutDate")}
           />
 
